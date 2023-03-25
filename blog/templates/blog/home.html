@@ -1,0 +1,13 @@
+{% extends "blog/base.html" %}
+
+
+{% block content %}
+        {% comment %} <h1>Blog Home!</h1> {% endcomment %}
+        {% for post in posts %}
+        {% comment %} <h1> {{post.title}} </h1>
+        <p> By {{ post.author }} on {{post.date_posted}}</p>
+        <p> {{post.content}} </p> {% endcomment %}
+
+        
+        {% endfor %}
+{% endblock content %}
