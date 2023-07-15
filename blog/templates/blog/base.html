@@ -31,9 +31,15 @@
                 <a class="nav-item nav-link" href="{% url 'blog-about' %}">About</a>
               </div>
               <!-- Navbar Right Side -->
-              <div class="navbar-nav one">
-                <a class="nav-item nav-link" href="#">Login</a>
-                <a class="nav-item nav-link" href="#">Register</a>
+              <div class="navbar-nav">
+
+                {% if user.is_authenticated %}
+                <a class="nav-item nav-link" href="{% url 'profile' %}">Profile</a>
+                <a class="nav-item nav-link" href="/logout/">logout</a>
+                {% else %}
+                <a class="nav-item nav-link" href="/login/">Login</a>
+                <a class="nav-item nav-link" href="/register/">Register</a>
+                {% endif %}
               </div>
             </div>
           </div>
@@ -42,6 +48,13 @@
       <main role="main" class="container">
         <div class="row">
           <div class="col-md-8">
+            {% if messages %}
+              {% for message in messages %}
+              <div class=" alert alert-{{message.tags}}">
+                {{message}}
+              </div>
+              {% endfor %}
+            {% endif %}
             {% block content %}{% endblock %}
           </div>
           <div class="col-md-4">
